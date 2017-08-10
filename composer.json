@@ -1,0 +1,22 @@
+{
+    "name": "matijabelec/database-php",
+    "description": "Database wrapper",
+    "license": "MIT",
+    "keywords": ["database", "pdo"],
+    "authors": [
+        {
+            "name": "Matija Belec",
+            "email": "matijabelec1@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "MatijaBelec\\Database\\": "src"
+        }
+    }
+}
