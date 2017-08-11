@@ -1,5 +1,22 @@
 <?php
 
+/**
+ * Database wrapper
+ *
+ * Database wrapper class that uses PDO for DB connection
+ *
+ * PHP5.*, PHP7
+ *
+ * LICENSE: MIT (details available at this package github page
+ *          https://github.com/matijabelec/database-php)
+ *
+ * @package    database-php
+ * @author     Matija Belec <matijabelec1@gmail.com>
+ * @copyright  2017 Matija Belec
+ * @license    MIT
+ * @link       https://github.com/matijabelec/database-php
+ */
+
 namespace MatijaBelec\Database;
 use PDO;
 
