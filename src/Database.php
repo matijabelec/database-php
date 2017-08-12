@@ -3,7 +3,7 @@
 /**
  * Database wrapper
  *
- * Database wrapper class that uses PDO for DB connection
+ * Database wrapper class that uses PDO for DB connection.
  *
  * PHP5.*, PHP7
  *
@@ -20,9 +20,29 @@
 namespace MatijaBelec\Database;
 use PDO;
 
+/**
+ * Database class that uses PDO as connector to database.
+ * It includes standard queries and transactions.
+ */
 class Database {
+  /**
+   * Connection object.
+   * @var PDO
+   */
   protected static $connection;
 
+  /**
+   * Connect to database.
+   * @param  boolean $config optional, if supplied should be in form of array:
+   *                         ['host' => '..',
+   *                          'database' => '..',
+   *                          'charset' => 'utf8',
+   *                          'username' => '..',
+   *                          'password' => '..',
+   *                         ]
+   * @return PDO|false       on success return PDO object or false on error/connection
+   *                         is not successfully established
+   */
   public function connect($config=false)
   {
     if($config === false){
@@ -45,6 +65,12 @@ class Database {
     return self::$connection;
   }
 
+  /**
+   * Runs query against database.
+   * @param  string $query       query string with placeholders for PDO prepare statement
+   * @param  array  $arguments   arguments array for prepared statement ($query argument)
+   * @return PDOStatement|false  returns PDOStatement on success or false on error
+   */
   public function query($query, $arguments=[])
   {
     $connection = $this->connect();
@@ -59,6 +85,12 @@ class Database {
     return $stmt;
   }
 
+  /**
+   * Runs query against database with return set.
+   * @param  string $query      query string with placeholders for PDO prepare statement
+   * @param  array  $arguments  arguments array for prepared statement ($query argument)
+   * @return array              returns array of rows on success or false on error
+   */
   public function select($query, $arguments=[])
   {
     $rows = array();
@@ -70,6 +102,10 @@ class Database {
     return $rows;
   }
 
+  /**
+   * Start transaction (BEGIN).
+   * @return boolean  returns boolean that represents success of opening transaction
+   */
   public function transaction()
   {
     $connection = $this->connect();
@@ -78,6 +114,10 @@ class Database {
     return $connection->beginTransaction();
   }
 
+  /**
+   * Close successfull transaction.
+   * @return boolean  returns boolean that represents success of closing transaction
+   */
   public function commit()
   {
     $connection = $this->connect();
@@ -86,6 +126,10 @@ class Database {
     return $connection->commit();
   }
 
+  /**
+   * Rollback transaction.
+   * @return boolean  returns boolean that represents success of rollback transaction
+   */
   public function rollback()
   {
     $connection = $this->connect();
@@ -94,11 +138,15 @@ class Database {
     return $connection->rollBack();
   }
 
+  /**
+   * Returns last error.
+   * @return array|false  returns array with error details or false if no error
+   */
   public function error()
   {
     $connection = $this->connect();
     if($connection === false)
-      return false;
+      return array(-1, -1, 'Connection error');
     return $connection->errorInfo();
   }
 }

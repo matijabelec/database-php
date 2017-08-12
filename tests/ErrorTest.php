@@ -3,7 +3,7 @@
 use MatijaBelec\Database\Database;
 
 class ErrorTest extends PHPUnit_Framework_TestCase {
-  public function testConnection()
+  public function testErrorMethod()
   {
     $config = parse_ini_file('config.ini');
 
